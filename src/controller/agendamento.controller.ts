@@ -13,9 +13,7 @@ import { AgendamentoService } from '../services/agendamento.service';
 @ApiTags('Agendamento')
 @Controller('agendamento')
 export class AgendamentoController {
-  constructor(
-    private readonly agendamentoService: AgendamentoService,
-  ) {}
+  constructor(private readonly agendamentoService: AgendamentoService) {}
 
   @Post()
   @ApiOperation({

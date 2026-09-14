@@ -1,5 +1,9 @@
 import { NestFactory } from '@nestjs/core';
-import { APIGatewayProxyEvent, APIGatewayProxyResult, Context } from 'aws-lambda';
+import {
+  APIGatewayProxyEvent,
+  APIGatewayProxyResult,
+  Context,
+} from 'aws-lambda';
 import serverlessExpress from '@vendia/serverless-express';
 
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
@@ -25,8 +29,7 @@ async function bootstrap(): Promise<LambdaHandler> {
     .addTag('Agendamento')
     .build();
 
-  const documentFactory = () =>
-    SwaggerModule.createDocument(app, config);
+  const documentFactory = () => SwaggerModule.createDocument(app, config);
 
   SwaggerModule.setup('api', app, documentFactory);
 

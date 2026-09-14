@@ -14,25 +14,15 @@ interface ErrorResponse {
   mensagem: string;
 }
 
-@Catch(
-  MedicoNaoEncontradoError,
-  HorarioIndisponivelError,
-)
-export class AgendamentoExceptionFilter
-  implements
-    ExceptionFilter<
-      MedicoNaoEncontradoError | HorarioIndisponivelError
-    >
-{
+@Catch(MedicoNaoEncontradoError, HorarioIndisponivelError)
+export class AgendamentoExceptionFilter implements ExceptionFilter<
+  MedicoNaoEncontradoError | HorarioIndisponivelError
+> {
   catch(
-    exception:
-      | MedicoNaoEncontradoError
-      | HorarioIndisponivelError,
+    exception: MedicoNaoEncontradoError | HorarioIndisponivelError,
     host: ArgumentsHost,
   ): void {
-    const response = host
-      .switchToHttp()
-      .getResponse<Response>();
+    const response = host.switchToHttp().getResponse<Response>();
 
     if (exception instanceof MedicoNaoEncontradoError) {
       const body: ErrorResponse = {

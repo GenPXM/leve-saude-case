@@ -1,25 +1,18 @@
 import { Injectable } from '@nestjs/common';
 
-import {
-  Agendamento,
-} from '../services/agendamento.service';
+import { Agendamento } from '../services/agendamento.service';
 
 import { AgendamentoRepository } from './agendamento.repository';
 
 @Injectable()
-export class AgendamentoMemoryRepository
-  implements AgendamentoRepository
-{
+export class AgendamentoMemoryRepository implements AgendamentoRepository {
   private readonly agendamentos: Agendamento[] = [];
 
   salvar(agendamento: Agendamento): void {
     this.agendamentos.push(agendamento);
   }
 
-  existePorMedicoEHorario(
-    medicoId: number,
-    dataHorario: string,
-  ): boolean {
+  existePorMedicoEHorario(medicoId: number, dataHorario: string): boolean {
     return this.agendamentos.some(
       (agendamento) =>
         agendamento.medico_id === medicoId &&

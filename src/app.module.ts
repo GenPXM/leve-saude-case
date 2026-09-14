@@ -12,10 +12,7 @@ import { AgendamentoExceptionFilter } from './filters/agendamento-exception.filt
 
 @Module({
   imports: [],
-  controllers: [
-    AgendaController,
-    AgendamentoController,
-  ],
+  controllers: [AgendaController, AgendamentoController],
   providers: [
     AgendaService,
     AgendamentoService,
@@ -28,6 +25,5 @@ import { AgendamentoExceptionFilter } from './filters/agendamento-exception.filt
       useClass: AgendamentoExceptionFilter,
     },
   ],
-  
 })
 export class AppModule {}

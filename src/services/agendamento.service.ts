@@ -33,14 +33,10 @@ export interface AgendamentoResponse {
 
 @Injectable()
 export class AgendamentoService {
-  constructor(
-    private readonly agendamentoRepository: AgendamentoRepository,
-  ) {}
+  constructor(private readonly agendamentoRepository: AgendamentoRepository) {}
 
   criar(data: CriarAgendamento): AgendamentoResponse {
-    const medico = Medicos.medicos.find(
-      (item) => item.id === data.medico_id,
-    );
+    const medico = Medicos.medicos.find((item) => item.id === data.medico_id);
 
     if (!medico) {
       throw new MedicoNaoEncontradoError(data.medico_id);
@@ -54,11 +50,10 @@ export class AgendamentoService {
       throw new HorarioIndisponivelError();
     }
 
-    const horarioOcupado =
-      this.agendamentoRepository.existePorMedicoEHorario(
-        data.medico_id,
-        data.data_horario,
-      );
+    const horarioOcupado = this.agendamentoRepository.existePorMedicoEHorario(
+      data.medico_id,
+      data.data_horario,
+    );
 
     if (horarioOcupado) {
       throw new HorarioIndisponivelError();
