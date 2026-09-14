@@ -1,3 +1,11 @@
+import {
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
+
 import { AgendaController } from './controller/agenda.controller';
 import { AgendaService } from './services/agenda.service';
 
@@ -6,10 +14,7 @@ describe('AgendaController', () => {
   let agendaService: AgendaService;
 
   beforeEach(() => {
-    agendaService = {
-      getMedicos: jest.fn(),
-    } as unknown as AgendaService;
-
+    agendaService = new AgendaService();
     agendaController = new AgendaController(agendaService);
   });
 
@@ -23,12 +28,13 @@ describe('AgendaController', () => {
           horarios_disponiveis: [
             '2026-06-10 09:00',
             '2026-06-10 10:00',
-            '2026-06-10 11:00',
           ],
         },
       ];
 
-      jest.spyOn(agendaService, 'getMedicos').mockReturnValue(medicos);
+      jest
+        .spyOn(agendaService, 'getMedicos')
+        .mockReturnValue(medicos);
 
       const resultado = agendaController.getMedicos();
 
@@ -41,12 +47,16 @@ describe('AgendaController', () => {
         {
           id: 1,
           nome: 'Dr. João Silva',
-          especialidade: 'Cardiologia',
-          horarios_disponiveis: ['2026-06-10 09:00'],
+          especialidade: 'CARDIOLOGISTA',
+          horarios_disponiveis: [
+            '2026-06-10 09:00',
+          ],
         },
       ];
 
-      jest.spyOn(agendaService, 'getMedicos').mockReturnValue(medicos);
+      jest
+        .spyOn(agendaService, 'getMedicos')
+        .mockReturnValue(medicos);
 
       agendaController.getMedicos();
 
